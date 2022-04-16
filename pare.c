@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 struct group{
-	int group_[1000];
+	double group_[1000];
 	int count;
 };
 
@@ -14,7 +15,7 @@ char add_(struct group *g1,double f){
 void print(struct group *g1){
 	int n;
 	for (n=0;n<g1->count;n++){
-		printf("%d",(int)g1->group_[n]);
+		printf("%f",g1->group_[n]);
 		if (n!=g1->count-1)printf(" , ");
 	}
 	printf("\n");
@@ -29,11 +30,13 @@ int main(){
 	struct group *gg1;
 	gg1=&g1;
 	gg1->count=0;
+	notpare.count=0;
+	pare.count=0;
 	for(n=0;n<5;n++)add_(gg1,d[n]);
 	printf("\ngroup : ");
 	print(gg1);
 	for(n=0;n<gg1->count;n++){
-		if(gg1->group_[n]/2*2==gg1->group_[n]){
+		if(floor(gg1->group_[n]/2)*2==gg1->group_[n]){
 			add_(&pare,gg1->group_[n]);
 		}else{
 			add_(&notpare,gg1->group_[n]);

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 struct group{
-	int group_[1000];
+	double group_[1000];
 	int count;
 };
 
@@ -15,7 +15,7 @@ char add_(struct group *g1,double f){
 void print(struct group *g1){
 	int n;
 	for (n=0;n<g1->count;n++){
-		printf("%d",(int)g1->group_[n]);
+		printf("%f",g1->group_[n]);
 		if (n!=g1->count-1)printf(" , ");
 	}
 	printf("\n");
@@ -23,28 +23,30 @@ void print(struct group *g1){
 
 int main(){
 	int n;
-	double d[]={-2,-1,0,1,2};
+	double ff;
+	double d[]={-2.20D,-1.00D,0.00D,1.10D,2.00D};
 	struct group g1;
-	struct group negative;
-	struct group positive;
+	struct group notInteger;
+	struct group Integers;
 	struct group *gg1;
 	gg1=&g1;
 	gg1->count=0;
-	negative.count=0;
-	positive.count=0;
+	notInteger.count=0;
+	Integers.count=0;
 	for(n=0;n<5;n++)add_(gg1,d[n]);
 	printf("\ngroup : ");
 	print(gg1);
 	for(n=0;n<gg1->count;n++){
-		if(gg1->group_[n]< 0){
-			add_(&negative,gg1->group_[n]);
+		ff=floor(gg1->group_[n]);
+		if(ff==gg1->group_[n]){
+			add_(&Integers,gg1->group_[n]);
 		}else{
-			add_(&positive,gg1->group_[n]);
+			add_(&notInteger,gg1->group_[n]);
 		}
 	}
-	printf("\npositive : ");
-	print(&positive);
-	printf("\nnegative : ");
-	print(&negative);
+	printf("\nInteger : ");
+	print(&Integers);
+	printf("\nnot Integer : ");
+	print(&notInteger);
 
 }
